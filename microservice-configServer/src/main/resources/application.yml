@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/LegendarioTM564/Tienda_Microservicios
+          search-locations: classpath:/configurations
+          username: ${GIT_USER}
+          password: ${GIT_PASSWORD}

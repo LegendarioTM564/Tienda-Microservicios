@@ -1,0 +1,27 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: microservice-gateway
+  config:
+    import: optional:configserver:http://localhost:8081
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enable: true
+          lower-case-service-id: true
+      routes:
+        - id: products
+          uri: http://localhost:8090
+          predicates:
+            - Path=/products/**
+        - id: shoppingcart
+          uri: http://localhost:8091
+          predicates:
+            - Path=/cart/**
+        - id: sales
+          uri: http://localhost:8092
+          predicates:
+            - Path=/sale/**
