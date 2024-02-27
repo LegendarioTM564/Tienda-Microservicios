@@ -40,11 +40,10 @@ public class CartController {
     @CircuitBreaker(name="microservice-products", fallbackMethod = "fallBackSaveCart")
     @Retry(name= "microservice-products")
     @PostMapping(value = "/save")
-    public ResponseEntity<String> saveCart(@RequestBody CartDTO cartDTO){
+    public ResponseEntity<Long> saveCart(@RequestBody CartDTO cartDTO){
 
-        cartService.saveCart(cartDTO);
-
-        return ResponseEntity.ok("Carrito Guardado");
+        Long idCart = cartService.saveCart(cartDTO);
+        return ResponseEntity.ok(idCart);
     }
 
     @DeleteMapping(value ="{id_cart}/delete/item/{id_item}" )

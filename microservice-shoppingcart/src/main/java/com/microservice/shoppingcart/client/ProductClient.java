@@ -13,4 +13,8 @@ public interface ProductClient {
     @GetMapping(value = "/products/get/{id_product}")
     public ProductDTO getProductsById(@PathVariable Long id_product);
 
+
+
+
+
 }

@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor @NoArgsConstructor
 public class SaleDTO {
 
+
     private Long id_sale;
     private LocalDateTime create_at;
     private Long id_cart;

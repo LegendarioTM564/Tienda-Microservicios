@@ -8,6 +8,8 @@ import com.microservice.sales.repository.ISaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class SaleService implements ISaleService{
 
@@ -26,13 +28,13 @@ public class SaleService implements ISaleService{
     }
 
     @Override
-    public SaleDTO getSaleDtoById(Long id_sale, Long id_cart) {
+    public SaleDTO getSaleDtoById(Long id_sale) {
         //Se busca la venta en la base de datos.
         Sale sale = this.getSaleById(id_sale);
         SaleDTO saleDTO = new SaleDTO();
 
         //Consumimos el cliente del carrito para consultar los datos del carrito.
-        CartDTO cartDTO = shoppingCartClient.getCartById(id_cart);
+        CartDTO cartDTO = shoppingCartClient.getCartById(sale.getId_cart());
 
         //Le asigno los datos a SaleDTO
         saleDTO.setId_sale(sale.getId_sale());
@@ -42,6 +44,17 @@ public class SaleService implements ISaleService{
         saleDTO.setListItems(cartDTO.getListItems());
 
         return saleDTO;
+
+    }
+
+    @Override
+    public void saveSale(SaleDTO saleDTO) {
+        Sale sale = new Sale();
+        //Long id_cart = shoppingCartClient.saveCart(saleDTO.getCartDTO()).getBody();
+        sale.setId_cart(saleDTO.getId_cart());
+        sale.setCreate_at(LocalDateTime.now());
+
+        saleRepository.save(sale);
 
     }
 }

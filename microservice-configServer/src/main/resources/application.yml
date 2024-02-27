@@ -8,7 +8,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/LegendarioTM564/Tienda_Microservicios
-          search-locations: classpath:/configurations
+          uri: https://github.com/LegendarioTM564/Tienda-Microservicios.git
+          searchPaths: configdata
           username: ${GIT_USER}
           password: ${GIT_PASSWORD}
